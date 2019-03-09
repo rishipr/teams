@@ -1,0 +1,149 @@
+@import "../../../styles/base.scss";
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border-bottom: 2px solid $lighterGray;
+  background-color: $white;
+  position: fixed;
+  width: 100%;
+  min-width: 1100px;
+  z-index: 1000;
+}
+
+/* Left side of nav */
+.left-top {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+
+  .hamburger-top-menu {
+    font-size: 20px;
+    transition: all 0.25s ease 0s;
+    display: none;
+
+    &:hover {
+      cursor: pointer;
+      font-size: 24px;
+      transition: all 0.25s ease 0s;
+      color: $primaryBlue;
+    }
+  }
+
+  .brand-header {
+    margin-left: 1rem;
+    font-weight: 500;
+    font-family: $code;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    user-select: none;
+    color: $black;
+    transition: color 0.25s ease 0s;
+
+    &:hover {
+      color: $primaryBlue;
+      transition: color 0.25s ease 0s;
+    }
+  }
+
+  .brand-header-sub {
+    font-size: 0.5rem;
+  }
+}
+
+/* Right side of nav */
+.right-top {
+  display: flex;
+  align-items: center;
+  margin-right: 225px;
+  transition: all 0.25s ease 0s;
+
+  .email {
+    font-size: 10px;
+    margin-right: 1rem;
+    color: $darkGray;
+    text-align: right;
+    line-height: 0.5rem;
+  }
+
+  .sign-out {
+    background-color: $lighterGray;
+    color: $darkGray;
+    text-decoration: none;
+    font-family: $code;
+    transition: all 0.25s ease 0s;
+    padding: 0.25rem;
+    display: inline-block;
+
+    &:hover {
+      color: $primaryBlue;
+      transform: translateY(-2.5px);
+      transition: all 0.25s ease 0s;
+      cursor: pointer;
+    }
+  }
+
+  .profile {
+    height: 15px;
+    width: 15px;
+    padding: 1.25rem;
+    font-size: 12px;
+    background-color: $red;
+    color: $white;
+    margin-right: 2rem;
+    display: inline-block;
+    user-select: none;
+    transition: all 0.25s ease 0s;
+
+    &:hover {
+      opacity: 0.9;
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $gray;
+    background-color: $white;
+    padding: 1rem;
+    transform: translate(-9rem, 1.5rem);
+
+    p {
+      width: 140px;
+      color: $darkGray;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      font-size: 12px;
+    }
+
+    li {
+      width: 140px;
+      padding: 1rem;
+      color: $black;
+      background-color: $white;
+      transition: all 0.25s ease 0s;
+
+      &:hover {
+        cursor: pointer;
+        color: $primaryBlue;
+        background-color: $lighterGray;
+        transition: all 0.25s ease 0s;
+      }
+    }
+  }
+}
+
+.hamburger-visible {
+  display: block !important;
+}
+
+.right-top-visibile {
+  margin-right: 0px;
+  transition: all 0.25s ease 0s;
+}

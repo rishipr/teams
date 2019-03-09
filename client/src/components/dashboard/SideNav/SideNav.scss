@@ -1,0 +1,76 @@
+@import "../../../styles/base.scss";
+
+.side {
+  min-width: 225px;
+  max-width: 225px;
+  height: 100vh;
+  border-right: 2px solid $lighterGray;
+  background-color: $mainDark;
+  position: fixed;
+  z-index: 1;
+  margin-left: 0px;
+  transition: margin-left 0.25s ease 0s;
+
+  ul {
+    margin-top: 1.55rem;
+    padding-left: 0px;
+
+    .hamburger-side-menu {
+      color: $white;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 1rem;
+      transition: all 0.25s ease 0s;
+      font-size: 20px;
+      margin-bottom: 1rem;
+
+      &:hover {
+        cursor: pointer;
+        font-size: 24px;
+        transition: all 0.25s ease 0s;
+      }
+    }
+
+    div,
+    a {
+      color: $white;
+      width: 100%;
+      display: block;
+      transition: all 0.25s ease 0s;
+
+      &:hover {
+        cursor: pointer;
+        transition: all 0.25s ease 0s;
+      }
+
+      li {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+
+        &:hover {
+          background-color: $lightDark;
+        }
+
+        .icon {
+          display: inline-block;
+          font-size: 16px;
+          vertical-align: text-bottom;
+          padding-right: 1rem;
+          padding-left: 1rem;
+          padding-top: 0.25rem;
+        }
+      }
+    }
+  }
+}
+
+.invisibile {
+  margin-left: -225px;
+  transition: margin-left 0.25s ease 0s;
+}
+
+.active-page {
+  color: $white !important;
+  background-color: $lightDark;
+  transition: all 0.25s ease 0s;
+}
