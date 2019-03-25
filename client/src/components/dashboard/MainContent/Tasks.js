@@ -1,19 +1,45 @@
 import React, { Component } from "react";
+import "./MainContent.scss";
+import { connect } from "react-redux";
+
+import Modal from "./Modal/Modal";
 
 class Tasks extends Component {
+  state = {
+    modal: false
+  };
+
+  toggleModal = e => {
+    this.setState({ modal: !this.state.modal });
+  };
+
   render() {
+    const { projects } = this.props.projects;
+
     return (
       <div className="main-content">
-        <h1 className="header">Tasks</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. At beatae
-          necessitatibus quibusdam labore omnis. Amet quae soluta quo officiis
-          vero commodi beatae, magnam placeat! Corporis voluptatum doloribus
-          atque. Assumenda, tempore.
-        </p>
+        <h1 className="header">Your Tasks</h1>
+        <div className="projects">
+          <div className="no-projects">
+            <h1 className="header">You have no tasks</h1>
+            {projects.length > 0 ? null : (
+              <button className="main-btn" onClick={this.toggleModal}>
+                Create your first project
+              </button>
+            )}
+            <Modal onClose={this.toggleModal} modal={this.state.modal} />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default Tasks;
+const mapStateToProps = state => ({
+  projects: state.projects
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Tasks);

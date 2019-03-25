@@ -1,3 +1,9 @@
+// Authentication
 export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
+// Projects
+export const CREATE_PROJECT = "CREATE_PROJECT";
+export const GET_PROJECTS = "GET_PROJECTS";
+export const PROJECTS_LOADING = "PROJECTS_LOADING";

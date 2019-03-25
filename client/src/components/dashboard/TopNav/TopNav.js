@@ -78,7 +78,7 @@ class TopNav extends Component {
           </li>
           <li>
             <div className="profile" onClick={this.handleProfileClick}>
-              <span>{name.split("")[0]}</span>
+              <span>{this.props.auth ? name.split("")[0] : null}</span>
             </div>
             {this.state.dropdown ? (
               <ul className="dropdown">

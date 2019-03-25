@@ -9,7 +9,7 @@
 
 .header {
   font-size: 24px;
-  font-weight: 500;
+  font-weight: $medium;
   color: $black;
 }
 
@@ -39,6 +39,7 @@
   font-family: $code;
   transition: all 0.25s ease 0s;
   padding: 0rem 1rem;
+  min-width: 200px;
 
   &:hover {
     background-color: $hoverBlue;
@@ -47,4 +48,8 @@
     cursor: pointer;
     transition: all 0.25s ease 0s;
   }
+}
+
+.split {
+  display: flex;
 }

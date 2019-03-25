@@ -7,7 +7,6 @@ import "./SideNav.scss";
 
 class SideNav extends Component {
   onLogoutClick = e => {
-    e.preventDefault();
     this.props.logoutUser();
   };
 
@@ -27,9 +26,21 @@ class SideNav extends Component {
   };
 
   render() {
+    const { projects } = this.props.projects;
+
+    let projectData = projects.map(project => (
+      <li
+        className="project-listing"
+        key={project._id}
+        onClick={() => alert("TODO")}
+      >
+        {project.name}
+      </li>
+    ));
+
     return (
       <nav className="side">
-        <ul>
+        <ul className="top">
           <li>
             <i
               onClick={this.toggleMenu}
@@ -54,13 +65,21 @@ class SideNav extends Component {
             </li>
           </div>
         </ul>
+        {projects.length > 0 && (
+          <ul className="bottom">
+            <li>
+              <h4>Projects</h4>
+            </li>
+            {projectData}
+          </ul>
+        )}
       </nav>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  projects: state.projects
 });
 
 export default withRouter(

@@ -1,0 +1,42 @@
+@import "../../../styles/base.scss";
+
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.project-icon {
+  height: 150px;
+  width: 150px;
+  flex-basis: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  border: 1px solid $gray;
+  margin: 1rem;
+  text-align: center;
+  transition: all 0.25s ease 0s;
+
+  &:nth-child(6n + 1) {
+    margin-left: 0rem;
+  }
+
+  &:hover {
+    background-color: $lighterGray;
+    color: $primaryBlue;
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+  }
+}
+
+.projects-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  width: 98%;
+}
+
+.row {
+  display: flex;
+}

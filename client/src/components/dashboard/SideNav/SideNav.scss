@@ -10,8 +10,9 @@
   z-index: 1;
   margin-left: 0px;
   transition: margin-left 0.25s ease 0s;
+  overflow: scroll;
 
-  ul {
+  .top {
     margin-top: 1.55rem;
     padding-left: 0px;
 
@@ -73,4 +74,20 @@
   color: $white !important;
   background-color: $lightDark;
   transition: all 0.25s ease 0s;
+}
+
+.bottom {
+  margin-top: 4rem;
+  color: $white;
+  padding-left: 3.8rem;
+}
+
+.project-listing {
+  font-size: 14px;
+  padding-right: 1rem;
+  margin-top: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

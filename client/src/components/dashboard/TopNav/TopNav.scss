@@ -33,7 +33,7 @@
   }
 
   .brand-header {
-    margin-left: 1rem;
+    margin-left: 2rem;
     font-weight: 500;
     font-family: $code;
     font-size: 1rem;
@@ -41,12 +41,6 @@
     letter-spacing: 0.5rem;
     user-select: none;
     color: $black;
-    transition: color 0.25s ease 0s;
-
-    &:hover {
-      color: $primaryBlue;
-      transition: color 0.25s ease 0s;
-    }
   }
 
   .brand-header-sub {

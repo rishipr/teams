@@ -26,7 +26,7 @@ export const loginUser = userData => dispatch => {
 
       // Set token to localStorage
       const { token } = res.data;
-      localStorage.setItem("jwtTokenAsana", token);
+      localStorage.setItem("jwtTokenTeams", token);
       // Set token to Auth header
       setAuthToken(token);
       // Decode token to get user data
@@ -60,7 +60,7 @@ export const setUserLoading = () => {
 // Log user out
 export const logoutUser = () => dispatch => {
   // Remove token from local storage
-  localStorage.removeItem("jwtTokenAsana");
+  localStorage.removeItem("jwtTokenTeams");
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false

@@ -22,14 +22,17 @@ import NotFound from "./components/404/404";
 import "./App.scss";
 
 // Check for token to keep user logged in
-if (localStorage.jwtTokenAsana) {
+if (localStorage.jwtTokenTeams) {
   // Set auth token header auth
-  const token = localStorage.jwtTokenAsana;
+  const token = localStorage.jwtTokenTeams;
   setAuthToken(token);
+
   // Decode token and get user info and exp
   const decoded = jwt_decode(token);
+
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
+
   // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
@@ -52,7 +55,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <PrivateRoute exact path="/dashboard" component={Layout} />
               <Route
-                component={localStorage.jwtTokenAsana ? Layout : NotFound}
+                component={localStorage.jwtTokenTeams ? Layout : NotFound}
               />
             </Switch>
           </div>
