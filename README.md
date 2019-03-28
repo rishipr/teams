@@ -14,7 +14,7 @@ This project uses the following technologies
 
 ## Current Status
 
-![Current Status](http://g.recordit.co/EI9RmCK2VT.gif)
+![Current Status](http://g.recordit.co/3bgx7lERzV.gif)
 
 ### Checklist
 
@@ -29,8 +29,8 @@ This list will change & grow with time
 
 - [x] Create and fetch team projects
 - [x] Edit team projects
-- [ ] Delete team projects (only project owner should be able to delete)
-- [ ] Access shared projects
+- [x] Delete team projects (only project owner should be able to delete)
+- [x] Access shared projects
 
 #### Tasks
 

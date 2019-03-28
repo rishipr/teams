@@ -7,12 +7,30 @@ const Project = require("../../models/Project");
 // @route GET api/projects
 // @desc Get all projects for a specific user
 // @access Private
+// TODO Get all projects where user is member and where user is owner
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Project.find({ ownerId: req.user.id })
-      .then(projects => res.json(projects))
+  async (req, res) => {
+    let projectsArr = [];
+
+    // Member projects
+    await Project.find({}).then(projects => {
+      projects.map(project => {
+        project.teamMembers.map(member => {
+          if (member.email == req.user.email) {
+            projectsArr.push(project);
+          }
+        });
+      });
+    });
+
+    // Combine with owner projects
+    await Project.find({ ownerId: req.user.id })
+      .then(projects => {
+        let finalArr = [...projects, ...projectsArr];
+        res.json(finalArr);
+      })
       .catch(err => console.log(err));
   }
 );
