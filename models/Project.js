@@ -7,11 +7,19 @@ const ProjectSchema = new Schema({
     type: String,
     required: true
   },
-  ownerId: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
+  owner: {
+    type: Object,
     required: true
   },
+  // ownerId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "users",
+  //   required: true
+  // },
+  // ownerName: {
+  //   type: String,
+  //   required: true
+  // },
   teamMembers: [
     {
       email: {

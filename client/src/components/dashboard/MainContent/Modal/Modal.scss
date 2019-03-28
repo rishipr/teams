@@ -48,6 +48,11 @@
   font-family: $code;
 }
 
+.created-by {
+  font-size: 15px;
+  font-family: $code;
+}
+
 .form-input {
   background-color: $lighterGray;
   border: 1px solid $lighterGray;
@@ -92,6 +97,13 @@
   border-bottom: 1px solid $gray;
 }
 
+.members-edit {
+  margin-top: 1rem;
+  overflow: scroll;
+  border-bottom: 1px solid $gray;
+  height: 130px;
+}
+
 .add-members {
   background-color: $white;
   color: $primaryBlue;
@@ -132,8 +144,4 @@
     cursor: pointer;
     color: $red;
   }
-}
-
-.h-60 {
-  height: 60px;
 }

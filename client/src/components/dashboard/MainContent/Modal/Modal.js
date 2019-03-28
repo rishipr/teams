@@ -98,6 +98,9 @@ class Modal extends Component {
             &times;
           </span>
           <h1 className="header">Edit Project Info</h1>
+          <p className="created-by">
+            Created by {this.props.ownerName} ({this.props.ownerEmail})
+          </p>
           <div className="form-group">
             <label>
               <div className="form-label">Project Name (required)</div>
@@ -115,7 +118,7 @@ class Modal extends Component {
           <button className="main-btn add-members" onClick={this.addMember}>
             Add another member
           </button>
-          <div className="members">
+          <div className="members-edit">
             {members.map((val, id) => {
               let memberId = `member-${id}`,
                 emailId = `email-${id}`;

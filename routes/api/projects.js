@@ -25,8 +25,14 @@ router.get(
       });
     });
 
+    const owner = {
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    };
+
     // Combine with owner projects
-    await Project.find({ ownerId: req.user.id })
+    await Project.find({ owner: owner })
       .then(projects => {
         let finalArr = [...projects, ...projectsArr];
         res.json(finalArr);
@@ -41,9 +47,15 @@ router.get(
 router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const newProject = new Project({
-      ownerId: req.user.id,
+  async (req, res) => {
+    const owner = {
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    };
+
+    const newProject = await new Project({
+      owner: owner,
       name: req.body.projectName,
       teamMembers: req.body.members
     });

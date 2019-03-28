@@ -13,14 +13,16 @@ class Dashboard extends Component {
     name: "",
     members: [],
     id: "",
-    ownerId: ""
+    ownerId: "",
+    ownerName: "",
+    ownerEmail: ""
   };
 
   toggleModal = e => {
     this.setState({ modal: !this.state.modal, edit: false });
   };
 
-  toggleEditModal = (name, members, id, ownerId, e) => {
+  toggleEditModal = (name, members, id, ownerId, ownerName, ownerEmail, e) => {
     e.stopPropagation();
 
     this.setState({
@@ -29,7 +31,9 @@ class Dashboard extends Component {
       name: name,
       members: members,
       id: id,
-      ownerId: ownerId
+      ownerId: ownerId,
+      ownerName: ownerName,
+      ownerEmail: ownerEmail
     });
   };
 
@@ -52,7 +56,9 @@ class Dashboard extends Component {
             project.name,
             project.teamMembers,
             project._id,
-            project.ownerId
+            project.owner.id,
+            project.owner.name,
+            project.owner.email
           )}
         >
           Edit project
@@ -77,6 +83,8 @@ class Dashboard extends Component {
               members={this.state.members}
               id={this.state.id}
               ownerId={this.state.ownerId}
+              ownerName={this.state.ownerName}
+              ownerEmail={this.state.ownerEmail}
             />
           </div>
           <div className="projects-wrapper">{projectData}</div>
