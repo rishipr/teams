@@ -3,7 +3,8 @@ import "./Modal.scss";
 import { connect } from "react-redux";
 import {
   createProject,
-  updateProject
+  updateProject,
+  deleteProject
 } from "../../../../actions/projectsActions";
 
 /*
@@ -74,7 +75,8 @@ class Modal extends Component {
   };
 
   deleteProject = id => {
-    alert(`TODO: DELETE ${id}`);
+    this.props.deleteProject(id);
+    this.onClose();
   };
 
   onClose = e => {
@@ -160,12 +162,14 @@ class Modal extends Component {
             >
               Update Project
             </button>
-            <button
-              className="main-btn delete-project"
-              onClick={this.deleteProject.bind(this, this.props.id)}
-            >
-              Delete Project
-            </button>
+            {this.props.ownerId === this.props.auth.user.id ? (
+              <button
+                className="main-btn delete-project"
+                onClick={this.deleteProject.bind(this, this.props.id)}
+              >
+                Delete Project
+              </button>
+            ) : null}
           </div>
         </div>
       );
@@ -254,5 +258,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProject, updateProject }
+  { createProject, updateProject, deleteProject }
 )(Modal);

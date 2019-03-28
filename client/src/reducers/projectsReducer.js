@@ -1,6 +1,7 @@
 import {
   CREATE_PROJECT,
   UPDATE_PROJECT,
+  DELETE_PROJECT,
   GET_PROJECTS,
   PROJECTS_LOADING
 } from "../actions/types";
@@ -27,6 +28,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         projects: [action.payload, ...state.projects]
+      };
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          project => project._id !== action.payload
+        )
       };
     case GET_PROJECTS:
       return {

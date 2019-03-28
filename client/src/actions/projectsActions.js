@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   CREATE_PROJECT,
   UPDATE_PROJECT,
+  DELETE_PROJECT,
   GET_PROJECTS,
   PROJECTS_LOADING
 } from "./types";
@@ -28,6 +29,19 @@ export const updateProject = projectData => dispatch => {
       dispatch({
         type: UPDATE_PROJECT,
         payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+// Delete Project
+export const deleteProject = id => dispatch => {
+  axios
+    .delete(`/api/projects/delete/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_PROJECT,
+        payload: id
       })
     )
     .catch(err => console.log(err));
