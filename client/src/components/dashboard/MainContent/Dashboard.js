@@ -8,11 +8,27 @@ import Modal from "./Modal/Modal";
 
 class Dashboard extends Component {
   state = {
-    modal: false
+    modal: false,
+    edit: false,
+    name: "",
+    members: [],
+    id: ""
   };
 
   toggleModal = e => {
-    this.setState({ modal: !this.state.modal });
+    this.setState({ modal: !this.state.modal, edit: false });
+  };
+
+  toggleEditModal = (name, members, id, e) => {
+    e.stopPropagation();
+
+    this.setState({
+      modal: !this.state.modal,
+      edit: !this.state.edit,
+      name: name,
+      members: members,
+      id: id
+    });
   };
 
   render() {
@@ -24,9 +40,21 @@ class Dashboard extends Component {
       <div
         key={project._id}
         className="project-icon"
-        onClick={() => alert("TODO")}
+        onClick={() => alert("GO TO PROJECT")}
       >
-        {project.name}
+        <div className="project-name">{project.name}</div>
+        <div
+          className="project-info-button"
+          onClick={this.toggleEditModal.bind(
+            this,
+            project.name,
+            project.teamMembers,
+            project._id
+          )}
+        >
+          Edit project
+        </div>
+        <div className="project-info-button">Go to project</div>
       </div>
     ));
 
@@ -38,7 +66,14 @@ class Dashboard extends Component {
             Create another project
           </button>
           <div className="modal-wrapper">
-            <Modal onClose={this.toggleModal} modal={this.state.modal} />
+            <Modal
+              onClose={this.toggleModal}
+              modal={this.state.modal}
+              edit={this.state.edit}
+              name={this.state.name}
+              members={this.state.members}
+              id={this.state.id}
+            />
           </div>
           <div className="projects-wrapper">{projectData}</div>
         </>

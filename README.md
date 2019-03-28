@@ -28,8 +28,8 @@ This list will change & grow with time
 #### Projects
 
 - [x] Create and fetch team projects
-- [ ] Edit team projects
-- [ ] Delete team projects
+- [x] Edit team projects
+- [ ] Delete team projects (only project owner should be able to delete)
 - [ ] Access shared projects
 
 #### Tasks

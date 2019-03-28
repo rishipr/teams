@@ -101,9 +101,23 @@
   }
 }
 
-.create-project {
+.create-project,
+.update-project,
+.delete-project {
   position: fixed;
   bottom: 1.25rem;
+}
+
+.delete-project {
+  margin-left: 335px;
+  background-color: $red;
+  border: 1px solid $red;
+
+  &:hover {
+    background-color: $red;
+    border: 1px solid $red;
+    opacity: 0.9;
+  }
 }
 
 .delete {

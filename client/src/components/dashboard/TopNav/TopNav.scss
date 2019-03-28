@@ -26,9 +26,6 @@
 
     &:hover {
       cursor: pointer;
-      font-size: 24px;
-      transition: all 0.25s ease 0s;
-      color: $primaryBlue;
     }
   }
 
@@ -122,6 +119,7 @@
       color: $black;
       background-color: $white;
       transition: all 0.25s ease 0s;
+      font-size: 14px;
 
       &:hover {
         cursor: pointer;

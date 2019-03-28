@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../actions/authActions";
+import { Link } from "react-router-dom";
 
 import "./TopNav.scss";
 
@@ -83,6 +84,12 @@ class TopNav extends Component {
             {this.state.dropdown ? (
               <ul className="dropdown">
                 <p>Hello, {name.split(" ")[0]}</p>
+                <Link to="/dashboard">
+                  <li>Home</li>
+                </Link>
+                <Link to="/tasks">
+                  <li>My Tasks</li>
+                </Link>
                 <li onClick={this.onLogoutClick}>Sign Out</li>
               </ul>
             ) : null}

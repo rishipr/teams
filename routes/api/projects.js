@@ -34,8 +34,41 @@ router.post(
   }
 );
 
-// @route POST api/projects/delete
+// @route PATCH api/projects/update
+// @desc Update an existing project
+// @access Private
+router.patch(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let projectFields = {};
+
+    projectFields.name = req.body.projectName;
+    projectFields.teamMembers = req.body.members;
+
+    Project.findOneAndUpdate(
+      { _id: req.body.id },
+      { $set: projectFields },
+      { new: true }
+    )
+      .then(project => {
+        res.json(project);
+      })
+      .catch(err => console.log(err));
+  }
+);
+
+// @route DELETE api/projects/delete
 // @desc Delete an existing project
 // @access Private
+router.delete(
+  "/delete/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Project.findById(req.params.id).then(project => {
+      project.remove().then(() => res.json({ success: true }));
+    });
+  }
+);
 
 module.exports = router;

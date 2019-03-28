@@ -10,11 +10,16 @@
   z-index: 1;
   margin-left: 0px;
   transition: margin-left 0.25s ease 0s;
-  overflow: scroll;
 
   .top {
     margin-top: 1.55rem;
     padding-left: 0px;
+
+    li {
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     .hamburger-side-menu {
       color: $white;
@@ -27,8 +32,6 @@
 
       &:hover {
         cursor: pointer;
-        font-size: 24px;
-        transition: all 0.25s ease 0s;
       }
     }
 
@@ -82,10 +85,34 @@
   padding-left: 3.8rem;
 }
 
+.side-projects-header {
+  font-family: $code;
+}
+
+.project-listings {
+  height: 305px;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: $primaryBlue;
+  }
+}
+
 .project-listing {
   font-size: 14px;
   padding-right: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
+  transition: all 0.25s ease 0s;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 150px;
 
   &:hover {
     cursor: pointer;

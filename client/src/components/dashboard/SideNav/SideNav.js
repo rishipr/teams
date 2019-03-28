@@ -28,11 +28,11 @@ class SideNav extends Component {
   render() {
     const { projects } = this.props.projects;
 
-    let projectData = projects.map(project => (
+    let projectData = projects.sort().map(project => (
       <li
         className="project-listing"
         key={project._id}
-        onClick={() => alert("TODO")}
+        onClick={() => alert("GO TO PROJECT")}
       >
         {project.name}
       </li>
@@ -68,9 +68,9 @@ class SideNav extends Component {
         {projects.length > 0 && (
           <ul className="bottom">
             <li>
-              <h4>Projects</h4>
+              <h4 className="side-projects-header">Projects</h4>
             </li>
-            {projectData}
+            <div className="project-listings">{projectData}</div>
           </ul>
         )}
       </nav>

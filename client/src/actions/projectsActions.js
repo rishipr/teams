@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { CREATE_PROJECT, GET_PROJECTS, PROJECTS_LOADING } from "./types";
+import {
+  CREATE_PROJECT,
+  UPDATE_PROJECT,
+  GET_PROJECTS,
+  PROJECTS_LOADING
+} from "./types";
 
 // Create Project
 export const createProject = projectData => dispatch => {
@@ -9,6 +14,19 @@ export const createProject = projectData => dispatch => {
     .then(res =>
       dispatch({
         type: CREATE_PROJECT,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+// Update Project
+export const updateProject = projectData => dispatch => {
+  axios
+    .patch("/api/projects/update", projectData)
+    .then(res =>
+      dispatch({
+        type: UPDATE_PROJECT,
         payload: res.data
       })
     )
