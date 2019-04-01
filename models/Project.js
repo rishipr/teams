@@ -11,15 +11,6 @@ const ProjectSchema = new Schema({
     type: Object,
     required: true
   },
-  // ownerId: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "users",
-  //   required: true
-  // },
-  // ownerName: {
-  //   type: String,
-  //   required: true
-  // },
   teamMembers: [
     {
       email: {

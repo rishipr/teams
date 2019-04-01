@@ -117,4 +117,12 @@
   &:hover {
     cursor: pointer;
   }
+
+  a {
+    color: $white;
+  }
+
+  a:visited {
+    color: $white;
+  }
 }

@@ -18,9 +18,6 @@ const TaskSchema = new Schema({
   dateDue: {
     type: Date
   },
-  priority: {
-    type: String
-  },
   assignedTo: {
     type: Schema.Types.ObjectId,
     ref: "users"

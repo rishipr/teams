@@ -2,12 +2,16 @@ import {
   CREATE_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT,
+  GET_PROJECT,
+  PROJECT_LOADING,
   GET_PROJECTS,
   PROJECTS_LOADING
 } from "../actions/types";
 
 const initialState = {
   projects: [],
+  project: [],
+  projectLoading: false,
   projectsLoading: false
 };
 
@@ -36,11 +40,22 @@ export default function(state = initialState, action) {
           project => project._id !== action.payload
         )
       };
+    case GET_PROJECT:
+      return {
+        ...state,
+        project: action.payload,
+        projectLoading: false
+      };
     case GET_PROJECTS:
       return {
         ...state,
         projects: action.payload,
         projectsLoading: false
+      };
+    case PROJECT_LOADING:
+      return {
+        ...state,
+        projectLoading: true
       };
     case PROJECTS_LOADING:
       return {

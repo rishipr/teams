@@ -22,7 +22,9 @@ class Tasks extends Component {
         <div className="projects">
           <div className="no-projects">
             <h1 className="header">You have no tasks</h1>
-            {projects.length > 0 ? null : (
+            {projects.length > 0 ? (
+              <p>Visit a project to create your first task</p>
+            ) : (
               <button className="main-btn" onClick={this.toggleModal}>
                 Create your first project
               </button>

@@ -13,16 +13,14 @@ class Dashboard extends Component {
     name: "",
     members: [],
     id: "",
-    ownerId: "",
-    ownerName: "",
-    ownerEmail: ""
+    owner: {}
   };
 
   toggleModal = e => {
     this.setState({ modal: !this.state.modal, edit: false });
   };
 
-  toggleEditModal = (name, members, id, ownerId, ownerName, ownerEmail, e) => {
+  toggleEditModal = (name, members, id, owner, e) => {
     e.stopPropagation();
 
     this.setState({
@@ -31,9 +29,7 @@ class Dashboard extends Component {
       name: name,
       members: members,
       id: id,
-      ownerId: ownerId,
-      ownerName: ownerName,
-      ownerEmail: ownerEmail
+      owner: owner
     });
   };
 
@@ -46,7 +42,7 @@ class Dashboard extends Component {
       <div
         key={project._id}
         className="project-icon"
-        onClick={() => alert("GO TO PROJECT")}
+        onClick={() => this.props.history.push(`/projects/${project._id}`)}
       >
         <div className="project-name">{project.name}</div>
         <div
@@ -56,9 +52,7 @@ class Dashboard extends Component {
             project.name,
             project.teamMembers,
             project._id,
-            project.owner.id,
-            project.owner.name,
-            project.owner.email
+            project.owner
           )}
         >
           Edit project
@@ -82,9 +76,7 @@ class Dashboard extends Component {
               name={this.state.name}
               members={this.state.members}
               id={this.state.id}
-              ownerId={this.state.ownerId}
-              ownerName={this.state.ownerName}
-              ownerEmail={this.state.ownerEmail}
+              owner={this.state.owner}
             />
           </div>
           <div className="projects-wrapper">{projectData}</div>

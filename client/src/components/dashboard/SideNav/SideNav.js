@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../actions/authActions";
 
@@ -29,12 +29,8 @@ class SideNav extends Component {
     const { projects } = this.props.projects;
 
     let projectData = projects.sort().map(project => (
-      <li
-        className="project-listing"
-        key={project._id}
-        onClick={() => alert("GO TO PROJECT")}
-      >
-        {project.name}
+      <li className="project-listing" key={project._id}>
+        <Link to={`/projects/${project._id}`}>{project.name}</Link>
       </li>
     ));
 

@@ -63,14 +63,15 @@ class Modal extends Component {
     this.onClose();
   };
 
-  updateProject = id => {
+  updateProject = async id => {
     let project = {
       id: this.props.id,
       projectName: this.state.projectName,
       members: this.state.members
     };
 
-    this.props.updateProject(project);
+    await this.props.updateProject(project);
+
     this.onClose();
   };
 
@@ -91,6 +92,7 @@ class Modal extends Component {
 
     let { members } = this.state;
 
+    // Edit project modal
     if (this.props.edit) {
       return (
         <div className="modal">
@@ -99,7 +101,7 @@ class Modal extends Component {
           </span>
           <h1 className="header">Edit Project Info</h1>
           <p className="created-by">
-            Created by {this.props.ownerName} ({this.props.ownerEmail})
+            Created by {this.props.owner.name} ({this.props.owner.email})
           </p>
           <div className="form-group">
             <label>
@@ -165,7 +167,7 @@ class Modal extends Component {
             >
               Update Project
             </button>
-            {this.props.ownerId === this.props.auth.user.id ? (
+            {this.props.owner.id === this.props.auth.user.id ? (
               <button
                 className="main-btn delete-project"
                 onClick={this.deleteProject.bind(this, this.props.id)}
@@ -178,6 +180,7 @@ class Modal extends Component {
       );
     }
 
+    // Create project modal
     return (
       <div className="modal">
         <span className="close-modal" onClick={this.onClose}>

@@ -4,6 +4,8 @@ import {
   CREATE_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT,
+  GET_PROJECT,
+  PROJECT_LOADING,
   GET_PROJECTS,
   PROJECTS_LOADING
 } from "./types";
@@ -47,6 +49,25 @@ export const deleteProject = id => dispatch => {
     .catch(err => console.log(err));
 };
 
+// Get specific project by id
+export const getProject = id => dispatch => {
+  dispatch(setProjectLoading());
+  axios
+    .get(`/api/projects/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROJECT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROJECT,
+        payload: null
+      })
+    );
+};
+
 // Get all projects for specific user
 export const getProjects = () => dispatch => {
   dispatch(setProjectsLoading());
@@ -64,6 +85,13 @@ export const getProjects = () => dispatch => {
         payload: null
       })
     );
+};
+
+// Project loading
+export const setProjectLoading = () => {
+  return {
+    type: PROJECT_LOADING
+  };
 };
 
 // Projects loading
