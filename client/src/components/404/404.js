@@ -9,7 +9,11 @@ const NotFound = props => {
         <b>404</b>
       </span>
       <br />
-      <span>The requested page was not found on our server.</span>
+      <p>The requested page was not found on our server.</p>
+      <p>
+        Either you the url you typed in is incorrect, or the page you are
+        looking for has been removed.
+      </p>
     </div>
   );
 };

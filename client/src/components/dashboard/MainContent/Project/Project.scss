@@ -12,5 +12,116 @@
 }
 
 .project-spinner {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
+}
+
+.center-btn {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tasks-container {
+  min-height: 600px;
+  margin: 0 auto;
+  width: 900px;
+  background-color: $white;
+  border: 1px solid $gray;
+}
+
+.add-btn {
+  margin-bottom: 0.7rem;
+  margin-left: 1rem;
+  background-color: $white;
+  color: $primaryBlue;
+
+  &:hover {
+    color: $white;
+  }
+}
+
+.project-tasks {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    width: 100%;
+    border: 1px solid $gray;
+    height: 40px;
+    line-height: 1.5em;
+    outline: 0;
+    font-size: 16px;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  i {
+    color: $primaryBlue;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    margin-right: 1rem;
+  }
+
+  input {
+    width: 92.5%;
+    outline: none;
+    border: none;
+    height: 36px;
+  }
+
+  .task-info {
+    font-size: 12px;
+    text-align: center;
+    padding: 0.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:nth-of-type(1) {
+      margin-right: 2rem;
+      width: 100px;
+    }
+
+    &:nth-of-type(2) {
+      width: 60px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $lighterGray;
+    }
+  }
+}
+
+.projects-first-row {
+  display: flex;
+  height: 75px;
+  align-items: center;
+}
+
+.projects-column-headers {
+  display: flex;
+  margin-left: auto;
+  font-size: 14px;
+  margin-right: 16px;
+
+  p {
+    font-weight: $medium;
+
+    &:nth-of-type(1) {
+      margin-right: 1.2rem;
+      width: 100px;
+      text-align: center;
+    }
+
+    &:nth-of-type(2) {
+      width: 55px;
+      text-align: center;
+    }
+  }
 }

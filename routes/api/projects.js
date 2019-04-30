@@ -42,7 +42,7 @@ router.get(
   }
 );
 
-// @route GET api/projects
+// @route GET api/projects/:id
 // @desc Get specific project by id
 // @access Private
 router.get(
@@ -102,7 +102,7 @@ router.patch(
   }
 );
 
-// @route DELETE api/projects/delete
+// @route DELETE api/projects/delete/:id
 // @desc Delete an existing project
 // @access Private
 router.delete(

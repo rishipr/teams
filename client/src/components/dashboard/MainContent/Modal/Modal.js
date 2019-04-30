@@ -12,10 +12,6 @@ Credit for dynamic form component:
 https://itnext.io/building-a-dynamic-controlled-form-in-react-together-794a44ee552c
 */
 
-/*
-TODO Add form validation for required fields, maximum lengths and email format
-*/
-
 class Modal extends Component {
   state = {
     projectName: "",
@@ -89,6 +85,12 @@ class Modal extends Component {
     if (!this.props.modal) {
       return null;
     }
+
+    document.onkeyup = e => {
+      if (e.keyCode === 27 && this.props.modal) {
+        this.onClose();
+      }
+    };
 
     let { members } = this.state;
 
@@ -180,80 +182,158 @@ class Modal extends Component {
       );
     }
 
-    // Create project modal
-    return (
-      <div className="modal">
-        <span className="close-modal" onClick={this.onClose}>
-          &times;
-        </span>
-        <h1 className="header">Create a project</h1>
-        <div className="form-group">
-          <label>
-            <div className="form-label">Project Name (required)</div>
-            <input
-              onChange={this.onChange}
-              value={this.state.projectName}
-              id="projectName"
-              type="text"
-              placeholder="My Awesome Project"
-              className="form-input"
-            />
-          </label>
-        </div>
-        <div className="form-label">Add team members (optional)</div>
-        <button className="main-btn add-members" onClick={this.addMember}>
-          Add another member
-        </button>
-        <div className="members">
-          {members.map((val, id) => {
-            let memberId = `member-${id}`,
-              emailId = `email-${id}`;
-            return (
-              <div className="split" key={id}>
-                <label className="form-label" htmlFor={memberId}>
-                  Name (optional)
-                  <input
-                    type="text"
-                    name="name"
-                    data-id={id}
-                    id={memberId}
-                    value={members[id].name}
-                    className="form-input"
-                    onChange={this.onChange}
-                  />
-                </label>
-                <label className="form-label split-email" htmlFor={emailId}>
-                  Email (required for teams)
-                  <input
-                    type="text"
-                    name="email"
-                    data-id={id}
-                    id={emailId}
-                    value={members[id].email}
-                    className="form-input"
-                    onChange={this.onChange}
-                  />
-                </label>
-                <span
-                  className="delete"
-                  onClick={this.deleteMember.bind(this, id)}
-                >
-                  REMOVE
-                </span>
-              </div>
-            );
-          })}
-        </div>
-        <div>
-          <button
-            className="main-btn create-project"
-            onClick={this.createProject}
-          >
-            Create Project
+    // Edit Task Modal
+    else if (this.props.task) {
+      return (
+        <div className="modal">
+          <span className="close-modal" onClick={this.onClose}>
+            &times;
+          </span>
+          <h1 className="header">Create a task</h1>
+          <div className="form-group">
+            <label>
+              <div className="form-label">Project Name (required)</div>
+              <input
+                onChange={this.onChange}
+                value={this.state.projectName}
+                id="projectName"
+                type="text"
+                placeholder="My Awesome Project"
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="form-label">Add team members (optional)</div>
+          <button className="main-btn add-members" onClick={this.addMember}>
+            Add another member
           </button>
+          <div className="members">
+            {members.map((val, id) => {
+              let memberId = `member-${id}`,
+                emailId = `email-${id}`;
+              return (
+                <div className="split" key={id}>
+                  <label className="form-label" htmlFor={memberId}>
+                    Name (optional)
+                    <input
+                      type="text"
+                      name="name"
+                      data-id={id}
+                      id={memberId}
+                      value={members[id].name}
+                      className="form-input"
+                      onChange={this.onChange}
+                    />
+                  </label>
+                  <label className="form-label split-email" htmlFor={emailId}>
+                    Email (required for teams)
+                    <input
+                      type="text"
+                      name="email"
+                      data-id={id}
+                      id={emailId}
+                      value={members[id].email}
+                      className="form-input"
+                      onChange={this.onChange}
+                    />
+                  </label>
+                  <span
+                    className="delete"
+                    onClick={this.deleteMember.bind(this, id)}
+                  >
+                    REMOVE
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <button
+              className="main-btn create-project"
+              onClick={this.createProject}
+            >
+              Create Project
+            </button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    // Create project modal
+    else
+      return (
+        <div className="modal">
+          <span className="close-modal" onClick={this.onClose}>
+            &times;
+          </span>
+          <h1 className="header">Create a project</h1>
+          <div className="form-group">
+            <label>
+              <div className="form-label">Project Name (required)</div>
+              <input
+                onChange={this.onChange}
+                value={this.state.projectName}
+                id="projectName"
+                type="text"
+                placeholder="My Awesome Project"
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="form-label">Add team members (optional)</div>
+          <button className="main-btn add-members" onClick={this.addMember}>
+            Add another member
+          </button>
+          <div className="members">
+            {members.map((val, id) => {
+              let memberId = `member-${id}`,
+                emailId = `email-${id}`;
+              return (
+                <div className="split" key={id}>
+                  <label className="form-label" htmlFor={memberId}>
+                    Name (optional)
+                    <input
+                      type="text"
+                      name="name"
+                      data-id={id}
+                      id={memberId}
+                      value={members[id].name}
+                      className="form-input"
+                      onChange={this.onChange}
+                    />
+                  </label>
+                  <label className="form-label split-email" htmlFor={emailId}>
+                    Email (required for teams)
+                    <input
+                      type="text"
+                      name="email"
+                      data-id={id}
+                      id={emailId}
+                      value={members[id].email}
+                      className="form-input"
+                      onChange={this.onChange}
+                    />
+                  </label>
+                  <span
+                    className="delete"
+                    onClick={this.deleteMember.bind(this, id)}
+                  >
+                    REMOVE
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <button
+              className="main-btn create-project"
+              onClick={this.createProject}
+            >
+              Create Project
+            </button>
+          </div>
+        </div>
+      );
   }
 }
 

@@ -14,7 +14,7 @@ This project uses the following technologies
 
 ## Current Status
 
-![Current Status](http://g.recordit.co/3bgx7lERzV.gif)
+![Current Status](http://g.recordit.co/zkU9sqo24G.gif)
 
 ### Checklist
 
@@ -57,9 +57,3 @@ npm run dev
 
 // Server runs on http://localhost:5000 (set in server.js) and client on http://localhost:3000 (default for CRA)
 ```
-
----
-
-### Extra
-
-Building this without the use of any front-end component libraries (e.g. Bootstrap, Material-UI, Ant Design), instead creating all UI components from scratch and using CSS Flexbox for layout

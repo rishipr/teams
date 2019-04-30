@@ -79,11 +79,11 @@ class TopNav extends Component {
           </li>
           <li>
             <div className="profile" onClick={this.handleProfileClick}>
-              <span>{this.props.auth.name ? name.split("")[0] : null}</span>
+              <span>{name.split("")[0]}</span>
             </div>
             {this.state.dropdown ? (
               <ul className="dropdown">
-                <p>Hello, {this.props.auth.name ? name.split(" ")[0] : null}</p>
+                <p>Hello, {name.split(" ")[0]}</p>
                 <Link to="/dashboard">
                   <li>Home</li>
                 </Link>
