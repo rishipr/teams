@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import "./Modal.scss";
 import { connect } from "react-redux";
 import {
   createProject,
   updateProject,
   deleteProject
 } from "../../../../actions/projectsActions";
+
+import moment from "moment";
+
+import "./Modal.scss";
 
 /*
 Credit for dynamic form component:
@@ -15,7 +18,11 @@ https://itnext.io/building-a-dynamic-controlled-form-in-react-together-794a44ee5
 class Modal extends Component {
   state = {
     projectName: "",
-    members: [{ name: "", email: "" }]
+    members: [{ name: "", email: "" }],
+    taskName: "",
+    assignee: "",
+    monthDue: "",
+    dayDue: ""
   };
 
   componentWillReceiveProps(nextProps) {
@@ -78,7 +85,41 @@ class Modal extends Component {
 
   onClose = e => {
     this.props.onClose && this.props.onClose(e);
-    this.setState({ projectName: "", members: [{ name: "", email: "" }] });
+    this.setState({
+      projectName: "",
+      taskName: "",
+      assignee: "",
+      monthDue: "",
+      dayDue: "",
+      members: [{ name: "", email: "" }]
+    });
+  };
+
+  onSelectChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
+  createTask = e => {
+    let fullDate =
+      this.state.monthDue +
+      "-" +
+      this.state.dayDue +
+      "-" +
+      Date().split(" ")[3];
+
+    let momentDate = moment(fullDate, "MM-DD-YYYY")
+      ._d.toString()
+      .split(" ");
+
+    let finalDate = momentDate[1] + " " + momentDate[2];
+
+    const data = {
+      task: this.state.taskName,
+      assignee: this.state.assignee,
+      dateDue: finalDate
+    };
+
+    alert(JSON.stringify(data));
   };
 
   render() {
@@ -94,8 +135,118 @@ class Modal extends Component {
 
     let { members } = this.state;
 
+    // Create task modal
+    if (this.props.task) {
+      const { teamMembers } = this.props.projects.project;
+      const { name } = this.props.auth.user;
+
+      // Assignee dropdown in Modal
+      let membersOptions = teamMembers.map((member, index) => (
+        <option key={index} value={member.name}>
+          {member.name}
+        </option>
+      ));
+
+      // Due date dropdown in Modal
+      const MONTHS = new Array(12).fill(1);
+      const DAYS = new Array(31).fill(1);
+
+      let monthsOptions = MONTHS.map((month, i) => (
+        <option key={i} value={i + 1}>
+          {i < 9 && "0"}
+          {i + 1}
+        </option>
+      ));
+
+      let daysOptions = DAYS.map((day, i) => (
+        <option key={i} value={i + 1}>
+          {i < 9 && "0"}
+          {i + 1}
+        </option>
+      ));
+
+      return (
+        <div className="modal">
+          <span className="close-modal" onClick={this.onClose}>
+            &times;
+          </span>
+          <h1 className="header">Create task</h1>
+          <div className="form-group">
+            <label>
+              <div className="form-label">Task Name</div>
+              <input
+                onChange={this.onChange}
+                value={this.state.taskName}
+                id="taskName"
+                type="text"
+                placeholder={"What is the task?"}
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <div className="split">
+              <label>
+                <div className="form-label">Assignee</div>
+                <select
+                  onChange={this.onSelectChange}
+                  value={this.state.assignee}
+                  id="assignee"
+                  type="text"
+                  className="form-input task-input-split"
+                >
+                  <option disabled value="">
+                    Select a teammate
+                  </option>
+                  <option value={name}>{name + " (You)"}</option>
+                  {membersOptions}
+                </select>
+              </label>
+              <label>
+                <div className="form-label">Due Date</div>
+                <div className="split">
+                  <select
+                    onChange={this.onSelectChange}
+                    value={this.state.monthDue}
+                    id="monthDue"
+                    type="text"
+                    className="form-input task-input-split month-due"
+                  >
+                    <option disabled value="">
+                      Month
+                    </option>
+                    {monthsOptions}
+                  </select>
+                  <select
+                    onChange={this.onSelectChange}
+                    value={this.state.dayDue}
+                    id="dayDue"
+                    type="text"
+                    className="form-input task-input-split"
+                  >
+                    <option disabled value="">
+                      Day
+                    </option>
+                    {daysOptions}
+                  </select>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button
+              className="main-btn update-project"
+              onClick={this.createTask}
+            >
+              Create Task
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     // Edit project modal
-    if (this.props.edit) {
+    else if (this.props.edit) {
       return (
         <div className="modal">
           <span className="close-modal" onClick={this.onClose}>
@@ -177,83 +328,6 @@ class Modal extends Component {
                 Delete Project
               </button>
             ) : null}
-          </div>
-        </div>
-      );
-    }
-
-    // Edit Task Modal
-    else if (this.props.task) {
-      return (
-        <div className="modal">
-          <span className="close-modal" onClick={this.onClose}>
-            &times;
-          </span>
-          <h1 className="header">Create a task</h1>
-          <div className="form-group">
-            <label>
-              <div className="form-label">Project Name (required)</div>
-              <input
-                onChange={this.onChange}
-                value={this.state.projectName}
-                id="projectName"
-                type="text"
-                placeholder="My Awesome Project"
-                className="form-input"
-              />
-            </label>
-          </div>
-          <div className="form-label">Add team members (optional)</div>
-          <button className="main-btn add-members" onClick={this.addMember}>
-            Add another member
-          </button>
-          <div className="members">
-            {members.map((val, id) => {
-              let memberId = `member-${id}`,
-                emailId = `email-${id}`;
-              return (
-                <div className="split" key={id}>
-                  <label className="form-label" htmlFor={memberId}>
-                    Name (optional)
-                    <input
-                      type="text"
-                      name="name"
-                      data-id={id}
-                      id={memberId}
-                      value={members[id].name}
-                      className="form-input"
-                      onChange={this.onChange}
-                    />
-                  </label>
-                  <label className="form-label split-email" htmlFor={emailId}>
-                    Email (required for teams)
-                    <input
-                      type="text"
-                      name="email"
-                      data-id={id}
-                      id={emailId}
-                      value={members[id].email}
-                      className="form-input"
-                      onChange={this.onChange}
-                    />
-                  </label>
-                  <span
-                    className="delete"
-                    onClick={this.deleteMember.bind(this, id)}
-                  >
-                    REMOVE
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <button
-              className="main-btn create-project"
-              onClick={this.createProject}
-            >
-              Create Project
-            </button>
           </div>
         </div>
       );

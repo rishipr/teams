@@ -37,7 +37,6 @@ This list will change & grow with time
 - [ ] Create, assign, and set deadlines for tasks
 - [ ] View and edit all teams tasks and personal tasks
 - [ ] Complete tasks
-- [ ] View both complete and incomplete tasks
 
 #### Containerization & Deployment
 

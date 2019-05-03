@@ -7,13 +7,9 @@ const TaskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "projects"
   },
-  name: {
+  taskName: {
     type: String,
     required: true
-  },
-  creator: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
   },
   dateDue: {
     type: Date

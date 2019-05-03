@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProject } from "../../../../actions/projectsActions";
+
 import moment from "moment";
 
 import Spinner from "../../../common/Spinner";
@@ -13,7 +14,7 @@ const tasks = [
   {
     task: "Finish initial spec documentation",
     due: "04/05/2019",
-    assignee: "Nikhil"
+    assignee: "Nikhil Vardya"
   },
   {
     task: "Send email to all advisors",
@@ -31,15 +32,17 @@ class Project extends Component {
   state = {
     modal: false,
     edit: false,
+    task: false,
     name: "",
     members: [],
     id: "",
     owner: {},
-    tasks: []
+    tasks: [],
+    date: ""
   };
 
   toggleModal = e => {
-    this.setState({ modal: !this.state.modal, edit: false });
+    this.setState({ modal: !this.state.modal, edit: false, task: false });
   };
 
   toggleEditModal = (name, members, id, owner, e) => {
@@ -50,6 +53,13 @@ class Project extends Component {
       members: members,
       id: id,
       owner: owner
+    });
+  };
+
+  toggleTaskModal = e => {
+    this.setState({
+      modal: !this.state.modal,
+      task: !this.state.task
     });
   };
 
@@ -118,11 +128,13 @@ class Project extends Component {
           >
             Edit Project Info
           </button>
+
           <div className="modal-wrapper">
             <Modal
               onClose={this.toggleModal}
               modal={this.state.modal}
               edit={this.state.edit}
+              task={this.state.task}
               name={this.state.name}
               members={this.state.members}
               id={this.state.id}
@@ -133,7 +145,7 @@ class Project extends Component {
             <div className="projects-first-row">
               <button
                 className="main-btn add-btn"
-                onClick={() => alert("TODO")}
+                onClick={this.toggleTaskModal}
               >
                 Add task
               </button>
@@ -147,6 +159,7 @@ class Project extends Component {
         </div>
       );
     }
+
     return (
       <div className="project-spinner">
         <Spinner />
