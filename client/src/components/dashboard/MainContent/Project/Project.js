@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProject } from "../../../../actions/projectsActions";
+import { getTasks } from "../../../../actions/taskActions";
 
 import moment from "moment";
 
@@ -65,12 +66,14 @@ class Project extends Component {
 
   componentDidMount() {
     this.props.getProject(this.props.match.params.project);
+    this.props.getTasks(this.props.match.params.project);
     this.setState({ tasks: tasks });
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.project !== prevProps.match.params.project) {
       this.props.getProject(this.props.match.params.project);
+      this.props.getTasks(this.props.match.params.project);
     }
   }
 
@@ -81,6 +84,8 @@ class Project extends Component {
   };
 
   render() {
+    const { tasks } = this.props.tasks;
+
     let tasksList = tasks.map((task, index) => (
       <div className="task-input" key={index}>
         <i className="material-icons" onClick={() => alert("TODO")}>
@@ -90,26 +95,20 @@ class Project extends Component {
           type="text"
           name="task"
           id={index}
-          value={task.task || tasks[index].task}
+          value={task.taskName || tasks[index].task}
           onChange={this.onChange}
           className="project-task"
         />
-        <span className="task-info">{task.assignee}</span>
-        <span className="task-info">
-          {(() => {
-            let date = moment(task.due, "MM-DD-YYYY")
-              ._d.toString()
-              .split(" ");
-            return date[1] + " " + date[2];
-          })()}
-        </span>
+        <span className="task-info">{task.assignedTo || "Assign to"}</span>
+        <span className="task-info">{task.dateDue || "Assign"}</span>
       </div>
     ));
 
     if (
       this.props.project &&
       this.props.project.teamMembers &&
-      !this.props.projects.projectLoading
+      !this.props.projects.projectLoading &&
+      !this.props.tasks.tasksLoading
     ) {
       const { project } = this.props;
 
@@ -171,10 +170,11 @@ class Project extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   project: state.projects.project,
-  projects: state.projects
+  projects: state.projects,
+  tasks: state.tasks
 });
 
 export default connect(
   mapStateToProps,
-  { getProject }
+  { getProject, getTasks }
 )(Project);

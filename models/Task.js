@@ -5,18 +5,18 @@ const Schema = mongoose.Schema;
 const TaskSchema = new Schema({
   project: {
     type: Schema.Types.ObjectId,
-    ref: "projects"
+    ref: "projects",
+    required: true
   },
   taskName: {
     type: String,
     required: true
   },
   dateDue: {
-    type: Date
+    type: String
   },
   assignedTo: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
+    type: String
   },
   dateCreated: {
     type: Date,

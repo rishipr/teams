@@ -1,3 +1,5 @@
+@import "../../styles/base.scss";
+
 .not-found {
   display: flex;
   flex-direction: column;
@@ -5,4 +7,13 @@
   justify-content: center;
   height: 100vh;
   width: 100%;
+  font-family: $code;
+}
+
+.not-found {
+  p {
+    &:nth-of-type(2) {
+      font-size: 12px;
+    }
+  }
 }

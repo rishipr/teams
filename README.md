@@ -34,7 +34,7 @@ This list will change & grow with time
 
 #### Tasks
 
-- [ ] Create, assign, and set deadlines for tasks
+- [x] Create, assign, view and set deadlines for team tasks
 - [ ] View and edit all teams tasks and personal tasks
 - [ ] Complete tasks
 

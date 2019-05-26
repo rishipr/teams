@@ -5,15 +5,11 @@ import {
   updateProject,
   deleteProject
 } from "../../../../actions/projectsActions";
+import { createTask } from "../../../../actions/taskActions";
 
 import moment from "moment";
 
 import "./Modal.scss";
-
-/*
-Credit for dynamic form component:
-https://itnext.io/building-a-dynamic-controlled-form-in-react-together-794a44ee552c
-*/
 
 class Modal extends Component {
   state = {
@@ -100,6 +96,8 @@ class Modal extends Component {
   };
 
   createTask = e => {
+    e.preventDefault();
+
     let fullDate =
       this.state.monthDue +
       "-" +
@@ -114,12 +112,15 @@ class Modal extends Component {
     let finalDate = momentDate[1] + " " + momentDate[2];
 
     const data = {
-      task: this.state.taskName,
+      project: this.props.projects.project._id,
+      taskName: this.state.taskName,
       assignee: this.state.assignee,
       dateDue: finalDate
     };
 
-    alert(JSON.stringify(data));
+    this.props.createTask(data);
+
+    this.onClose();
   };
 
   render() {
@@ -138,11 +139,11 @@ class Modal extends Component {
     // Create task modal
     if (this.props.task) {
       const { teamMembers } = this.props.projects.project;
-      const { name } = this.props.auth.user;
+      const { name, email } = this.props.auth.user;
 
       // Assignee dropdown in Modal
       let membersOptions = teamMembers.map((member, index) => (
-        <option key={index} value={member.name}>
+        <option key={index} value={member.email}>
           {member.name}
         </option>
       ));
@@ -166,15 +167,16 @@ class Modal extends Component {
       ));
 
       return (
-        <div className="modal">
+        <form onSubmit={this.createTask} className="modal">
           <span className="close-modal" onClick={this.onClose}>
             &times;
           </span>
           <h1 className="header">Create task</h1>
           <div className="form-group">
             <label>
-              <div className="form-label">Task Name</div>
+              <div className="form-label">Task Name (required)</div>
               <input
+                required
                 onChange={this.onChange}
                 value={this.state.taskName}
                 id="taskName"
@@ -198,7 +200,7 @@ class Modal extends Component {
                   <option disabled value="">
                     Select a teammate
                   </option>
-                  <option value={name}>{name + " (You)"}</option>
+                  <option value={email}>{name + " (You)"}</option>
                   {membersOptions}
                 </select>
               </label>
@@ -206,6 +208,7 @@ class Modal extends Component {
                 <div className="form-label">Due Date</div>
                 <div className="split">
                   <select
+                    required={this.state.dayDue ? true : false}
                     onChange={this.onSelectChange}
                     value={this.state.monthDue}
                     id="monthDue"
@@ -218,6 +221,7 @@ class Modal extends Component {
                     {monthsOptions}
                   </select>
                   <select
+                    required={this.state.monthDue ? true : false}
                     onChange={this.onSelectChange}
                     value={this.state.dayDue}
                     id="dayDue"
@@ -234,14 +238,11 @@ class Modal extends Component {
             </div>
           </div>
           <div>
-            <button
-              className="main-btn update-project"
-              onClick={this.createTask}
-            >
+            <button className="main-btn update-project" type="submit">
               Create Task
             </button>
           </div>
-        </div>
+        </form>
       );
     }
 
@@ -280,7 +281,7 @@ class Modal extends Component {
               return (
                 <div className="split" key={id}>
                   <label className="form-label" htmlFor={memberId}>
-                    Name (optional)
+                    Name (required for teams)
                     <input
                       type="text"
                       name="name"
@@ -365,7 +366,7 @@ class Modal extends Component {
               return (
                 <div className="split" key={id}>
                   <label className="form-label" htmlFor={memberId}>
-                    Name (optional)
+                    Name (required for teams)
                     <input
                       type="text"
                       name="name"
@@ -413,10 +414,11 @@ class Modal extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  projects: state.projects
+  projects: state.projects,
+  tasks: state.tasks
 });
 
 export default connect(
   mapStateToProps,
-  { createProject, updateProject, deleteProject }
+  { createProject, updateProject, deleteProject, createTask }
 )(Modal);

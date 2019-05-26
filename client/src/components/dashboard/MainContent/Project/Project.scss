@@ -105,6 +105,7 @@
 }
 
 .projects-column-headers {
+  font-family: $code;
   display: flex;
   margin-left: auto;
   font-size: 14px;
@@ -114,7 +115,7 @@
     font-weight: $medium;
 
     &:nth-of-type(1) {
-      margin-right: 1.2rem;
+      margin-right: 1.35rem;
       width: 100px;
       text-align: center;
     }
