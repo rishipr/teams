@@ -14,11 +14,9 @@ This project uses the following technologies
 
 ## Current Status
 
-![Current Status](http://g.recordit.co/zkU9sqo24G.gif)
+![Current Status](http://g.recordit.co/2s4rtcysD7.gif)
 
-### Checklist
-
-This list will change & grow with time
+### Progress
 
 #### General
 
@@ -35,13 +33,18 @@ This list will change & grow with time
 #### Tasks
 
 - [x] Create, assign, view and set deadlines for team tasks
-- [ ] View and edit all teams tasks and personal tasks
+- [ ] Edit all tasks
 - [ ] Complete tasks
 
 #### Containerization & Deployment
 
 - [ ] Docker
 - [ ] Deployment (AWS, Heroku, or Digital Ocean)
+
+#### Known Bugs
+
+- [ ] Logout sometimes doesn't execute properly
+- [ ] Updates to project information not reflected immediately in Project component view
 
 ## Quick Start
 

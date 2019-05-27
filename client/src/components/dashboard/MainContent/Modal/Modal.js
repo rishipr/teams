@@ -244,6 +244,113 @@ class Modal extends Component {
           </div>
         </form>
       );
+    } else if (this.props.editTask) {
+      const { teamMembers } = this.props.projects.project;
+      const { name, email } = this.props.auth.user;
+
+      // Assignee dropdown in Modal
+      let membersOptions = teamMembers.map((member, index) => (
+        <option key={index} value={member.email}>
+          {member.name}
+        </option>
+      ));
+
+      // Due date dropdown in Modal
+      const MONTHS = new Array(12).fill(1);
+      const DAYS = new Array(31).fill(1);
+
+      let monthsOptions = MONTHS.map((month, i) => (
+        <option key={i} value={i + 1}>
+          {i < 9 && "0"}
+          {i + 1}
+        </option>
+      ));
+
+      let daysOptions = DAYS.map((day, i) => (
+        <option key={i} value={i + 1}>
+          {i < 9 && "0"}
+          {i + 1}
+        </option>
+      ));
+
+      return (
+        <form onSubmit={this.createTask} className="modal">
+          <span className="close-modal" onClick={this.onClose}>
+            &times;
+          </span>
+          <h1 className="header">Edit task</h1>
+          <div className="form-group">
+            <label>
+              <div className="form-label">Task Name (required)</div>
+              <input
+                required
+                onChange={this.onChange}
+                value={this.state.taskName}
+                id="taskName"
+                type="text"
+                placeholder={"What is the task?"}
+                className="form-input"
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <div className="split">
+              <label>
+                <div className="form-label">Assignee</div>
+                <select
+                  onChange={this.onSelectChange}
+                  value={this.state.assignee}
+                  id="assignee"
+                  type="text"
+                  className="form-input task-input-split"
+                >
+                  <option disabled value="">
+                    Select a teammate
+                  </option>
+                  <option value={email}>{name + " (You)"}</option>
+                  {membersOptions}
+                </select>
+              </label>
+              <label>
+                <div className="form-label">Due Date</div>
+                <div className="split">
+                  <select
+                    required={this.state.dayDue ? true : false}
+                    onChange={this.onSelectChange}
+                    value={this.state.monthDue}
+                    id="monthDue"
+                    type="text"
+                    className="form-input task-input-split month-due"
+                  >
+                    <option disabled value="">
+                      Month
+                    </option>
+                    {monthsOptions}
+                  </select>
+                  <select
+                    required={this.state.monthDue ? true : false}
+                    onChange={this.onSelectChange}
+                    value={this.state.dayDue}
+                    id="dayDue"
+                    type="text"
+                    className="form-input task-input-split"
+                  >
+                    <option disabled value="">
+                      Day
+                    </option>
+                    {daysOptions}
+                  </select>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div>
+            <button className="main-btn update-project" type="submit">
+              Create Task
+            </button>
+          </div>
+        </form>
+      );
     }
 
     // Edit project modal

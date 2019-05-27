@@ -28,7 +28,7 @@ router.post(
       project: req.body.project,
       taskName: req.body.taskName,
       dateDue: req.body.dateDue,
-      assignedTo: req.body.assignee
+      assignee: req.body.assignee
     });
 
     NEW_TASK.save()

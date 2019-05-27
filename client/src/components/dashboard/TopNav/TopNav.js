@@ -79,11 +79,11 @@ class TopNav extends Component {
           </li>
           <li>
             <div className="profile" onClick={this.handleProfileClick}>
-              <span>{name.split("")[0]}</span>
+              <span>{name !== undefined && name.split("")[0]}</span>
             </div>
             {this.state.dropdown ? (
               <ul className="dropdown">
-                <p>Hello, {name.split(" ")[0]}</p>
+                <p>Hello, {name !== undefined && name.split(" ")[0]}</p>
                 <Link to="/dashboard">
                   <li>Home</li>
                 </Link>

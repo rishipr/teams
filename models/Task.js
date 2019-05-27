@@ -15,7 +15,7 @@ const TaskSchema = new Schema({
   dateDue: {
     type: String
   },
-  assignedTo: {
+  assignee: {
     type: String
   },
   dateCreated: {

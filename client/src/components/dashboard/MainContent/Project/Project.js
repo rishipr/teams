@@ -3,36 +3,17 @@ import { connect } from "react-redux";
 import { getProject } from "../../../../actions/projectsActions";
 import { getTasks } from "../../../../actions/taskActions";
 
-import moment from "moment";
-
 import Spinner from "../../../common/Spinner";
 import Modal from "../Modal/Modal";
 
 import "../MainContent.scss";
 import "./Project.scss";
 
-const tasks = [
-  {
-    task: "Finish initial spec documentation",
-    due: "04/05/2019",
-    assignee: "Nikhil Vardya"
-  },
-  {
-    task: "Send email to all advisors",
-    due: "04/02/2019",
-    assignee: "Johnson with a long name"
-  },
-  {
-    task: "Finalize sponsorship plan",
-    due: "05/10/2019",
-    assignee: "Rishi"
-  }
-];
-
 class Project extends Component {
   state = {
     modal: false,
     edit: false,
+    editTask: false,
     task: false,
     name: "",
     members: [],
@@ -64,10 +45,16 @@ class Project extends Component {
     });
   };
 
+  toggleEditTaskModal = e => {
+    this.setState({
+      modal: !this.state.modal,
+      editTask: !this.state.editTask
+    });
+  };
+
   componentDidMount() {
     this.props.getProject(this.props.match.params.project);
     this.props.getTasks(this.props.match.params.project);
-    this.setState({ tasks: tasks });
   }
 
   componentDidUpdate(prevProps) {
@@ -77,10 +64,16 @@ class Project extends Component {
     }
   }
 
-  onChange = e => {
-    let tasks = [...this.state.tasks];
-    tasks[e.target.id][e.target.name] = e.target.value;
-    this.setState({ tasks });
+  onChange = async e => {
+    await this.setState({ tasks: this.props.tasks.tasks });
+
+    let tasks = await [...this.state.tasks];
+
+    await alert(tasks[e.target.id].taskName);
+
+    tasks[e.target.id].taskName = await e.target.value;
+
+    await this.setState({ tasks });
   };
 
   render() {
@@ -95,12 +88,22 @@ class Project extends Component {
           type="text"
           name="task"
           id={index}
-          value={task.taskName || tasks[index].task}
+          value={task.taskName}
           onChange={this.onChange}
           className="project-task"
         />
-        <span className="task-info">{task.assignedTo || "Assign to"}</span>
-        <span className="task-info">{task.dateDue || "Assign"}</span>
+        <span className={!task.assignee ? "task-info muted" : "task-info"}>
+          {task.assignee === this.props.auth.user.email
+            ? "You"
+            : task.assignee || "Unassigned"}
+        </span>
+        <span
+          className={
+            task.dateDue === "Date undefined" ? "task-info muted" : "task-info"
+          }
+        >
+          {task.dateDue === "Date undefined" ? "Not Set" : task.dateDue}
+        </span>
       </div>
     ));
 

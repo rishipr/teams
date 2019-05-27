@@ -6,11 +6,28 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   font-family: $code;
-}
+  text-align: center;
 
-.not-found {
+  span {
+    color: $primaryBlue;
+    animation: float 3s ease-in-out infinite;
+
+    @keyframes float {
+      0% {
+        transform: translatey(0px);
+      }
+      50% {
+        transform: translatey(-10px);
+      }
+      100% {
+        transform: translatey(0px);
+      }
+    }
+  }
+
   p {
     &:nth-of-type(2) {
       font-size: 12px;
