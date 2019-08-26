@@ -2,6 +2,8 @@
 
 Project management platform for teams, inspired by [Asana](https://asana.com/) and built using a full JavaScript stack
 
+[Go to Demo](https://protected-eyrie-72642.herokuapp.com/) and create your own account or use `username: test@test.com` and `password: test123`
+
 ![Current Status](http://g.recordit.co/yx3oC8wmK3.gif)
 
 ## Stack (MERN & Redux)
@@ -37,7 +39,7 @@ This project uses the following technologies
 
 #### Containerization & Deployment
 
-- [ ] Deployment (AWS, Heroku, or Digital Ocean)
+- [x] Deployment (Heroku)
 
 ## Quick Start
 
