@@ -140,18 +140,76 @@ class Modal extends Component {
   };
 
   updateTask = id => {
-    let fullDate =
-      this.state.monthDue +
-      "-" +
-      this.state.dayDue +
-      "-" +
-      Date().split(" ")[3];
+    let finalDate;
 
-    let momentDate = moment(fullDate, "MM-DD-YYYY")
-      ._d.toString()
-      .split(" ");
+    let dates = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
 
-    let finalDate = momentDate[1] + " " + momentDate[2];
+    if (!this.state.monthDue && !this.state.dayDue) {
+      finalDate = this.props.dateDue;
+    } else if (
+      this.props.dateDue &&
+      this.props.dateDue !== "Date undefined" &&
+      !this.state.monthDue &&
+      this.state.dayDue
+    ) {
+      let fullDate =
+        dates.indexOf(this.props.dateDue.split(" ")[0]) +
+        1 +
+        "-" +
+        this.state.dayDue +
+        "-" +
+        Date().split(" ")[3];
+
+      let momentDate = moment(fullDate, "MM-DD-YYYY")
+        ._d.toString()
+        .split(" ");
+
+      finalDate = momentDate[1] + " " + momentDate[2];
+    } else if (
+      this.props.dateDue &&
+      this.props.dateDue !== "Date undefined" &&
+      !this.state.dayDue &&
+      this.state.monthDue
+    ) {
+      let fullDate =
+        this.state.monthDue +
+        "-" +
+        this.props.dateDue.split(" ")[1] +
+        "-" +
+        Date().split(" ")[3];
+
+      let momentDate = moment(fullDate, "MM-DD-YYYY")
+        ._d.toString()
+        .split(" ");
+
+      finalDate = momentDate[1] + " " + momentDate[2];
+    } else {
+      let fullDate =
+        this.state.monthDue +
+        "-" +
+        this.state.dayDue +
+        "-" +
+        Date().split(" ")[3];
+
+      let momentDate = moment(fullDate, "MM-DD-YYYY")
+        ._d.toString()
+        .split(" ");
+
+      finalDate = momentDate[1] + " " + momentDate[2];
+    }
 
     let task = {
       id: id,

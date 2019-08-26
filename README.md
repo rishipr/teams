@@ -2,6 +2,8 @@
 
 Project management platform for teams, inspired by [Asana](https://asana.com/) and built using a full JavaScript stack
 
+![Current Status](http://g.recordit.co/2s4rtcysD7.gif)
+
 ## Stack (MERN & Redux)
 
 This project uses the following technologies
@@ -12,10 +14,6 @@ This project uses the following technologies
 - [Node.js](https://nodejs.org/en/) for server
 - [SASS](https://sass-lang.com/) as CSS preprocessor
 - [Create React App](https://github.com/facebook/create-react-app) for bootstrapping client
-
-## Current Status
-
-![Current Status](http://g.recordit.co/2s4rtcysD7.gif)
 
 ### Progress
 
