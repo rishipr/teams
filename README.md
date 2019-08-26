@@ -39,7 +39,6 @@ This project uses the following technologies
 
 #### Containerization & Deployment
 
-- [ ] Docker
 - [ ] Deployment (AWS, Heroku, or Digital Ocean)
 
 ## Quick Start

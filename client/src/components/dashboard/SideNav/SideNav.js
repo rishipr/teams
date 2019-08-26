@@ -50,25 +50,25 @@ class SideNav extends Component {
               <i className="material-icons icon">home</i>Home
             </li>
           </NavLink>
+          {/*
           <NavLink exact activeClassName="active-page" to="/tasks">
             <li>
               <i className="material-icons icon">check_circle</i>My Tasks
             </li>
           </NavLink>
+          */}
           <div className="sign-out" onClick={this.onLogoutClick}>
             <li>
               <i className="material-icons icon">arrow_back</i>Sign Out
             </li>
           </div>
         </ul>
-        {projects.length > 0 && (
-          <ul className="bottom">
-            <li>
-              <h4 className="side-projects-header">Projects</h4>
-            </li>
-            <div className="project-listings">{projectData}</div>
-          </ul>
-        )}
+        <ul className="bottom">
+          <li>
+            <h4 className="side-projects-header">Projects</h4>
+          </li>
+          <div className="project-listings">{projectData}</div>
+        </ul>
       </nav>
     );
   }

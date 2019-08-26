@@ -61,20 +61,16 @@ class TopNav extends Component {
           >
             menu
           </i>
-          <h1 className="brand-header">
-            Team<span className="brand-header-sub">s</span>
-          </h1>
+          <Link to="/dashboard">
+            <h1 className="brand-header">
+              Team<span className="brand-header-sub">s</span>
+            </h1>
+          </Link>
         </div>
         <ul className="right-top">
           <li>
             <div className="email">
               <p>Signed in as {email}</p>
-              <p>
-                Not you?{" "}
-                <span className="sign-out" onClick={this.onLogoutClick}>
-                  Sign Out
-                </span>
-              </p>
             </div>
           </li>
           <li>
@@ -87,9 +83,11 @@ class TopNav extends Component {
                 <Link to="/dashboard">
                   <li>Home</li>
                 </Link>
+                {/*
                 <Link to="/tasks">
                   <li>My Tasks</li>
                 </Link>
+                */}
                 <li onClick={this.onLogoutClick}>Sign Out</li>
               </ul>
             ) : null}

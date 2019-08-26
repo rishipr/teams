@@ -1,6 +1,6 @@
 import {
   CREATE_TASK,
-  // UPDATE_TASK,
+  UPDATE_TASK,
   DELETE_TASK,
   GET_TASKS,
   TASKS_LOADING
@@ -23,6 +23,17 @@ export default function(state = initialState, action) {
         ...state,
         tasks: action.payload,
         tasksLoading: false
+      };
+    case UPDATE_TASK:
+      let index = state.tasks.findIndex(
+        task => task._id === action.payload._id
+      );
+
+      state.tasks.splice(index, 1);
+
+      return {
+        ...state,
+        tasks: [action.payload, ...state.tasks]
       };
     case DELETE_TASK:
       return {

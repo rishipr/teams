@@ -6,7 +6,11 @@ import {
   updateProject,
   deleteProject
 } from "../../../../actions/projectsActions";
-import { createTask, deleteTask } from "../../../../actions/taskActions";
+import {
+  createTask,
+  deleteTask,
+  updateTask
+} from "../../../../actions/taskActions";
 
 import moment from "moment";
 
@@ -78,6 +82,7 @@ class Modal extends Component {
     await this.props.updateProject(project);
 
     this.onClose();
+    window.location.reload();
   };
 
   deleteProject = id => {
@@ -130,6 +135,32 @@ class Modal extends Component {
     };
 
     this.props.createTask(data);
+
+    this.onClose();
+  };
+
+  updateTask = id => {
+    let fullDate =
+      this.state.monthDue +
+      "-" +
+      this.state.dayDue +
+      "-" +
+      Date().split(" ")[3];
+
+    let momentDate = moment(fullDate, "MM-DD-YYYY")
+      ._d.toString()
+      .split(" ");
+
+    let finalDate = momentDate[1] + " " + momentDate[2];
+
+    let task = {
+      id: id,
+      taskName: this.state.taskName,
+      dateDue: finalDate,
+      assignee: this.state.assignee || this.props.assignee
+    };
+
+    this.props.updateTask(task);
 
     this.onClose();
   };
@@ -310,7 +341,7 @@ class Modal extends Component {
       ));
 
       return (
-        <form onSubmit={this.createTask} className="modal">
+        <form className="modal">
           <span className="close-modal" onClick={this.onClose}>
             &times;
           </span>
@@ -394,7 +425,13 @@ class Modal extends Component {
             </div>
           </div>
           <div>
-            <button className="main-btn update-project">Update Task</button>
+            <button
+              className="main-btn update-project"
+              type="button"
+              onClick={this.updateTask.bind(this, taskId)}
+            >
+              Update Task
+            </button>
             <button
               className="main-btn delete-project"
               onClick={this.deleteTask.bind(this, taskId)}
@@ -580,5 +617,12 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProject, updateProject, deleteProject, createTask, deleteTask }
+  {
+    createProject,
+    updateProject,
+    deleteProject,
+    createTask,
+    deleteTask,
+    updateTask
+  }
 )(withRouter(Modal));
