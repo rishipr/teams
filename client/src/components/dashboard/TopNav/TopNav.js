@@ -28,6 +28,7 @@ class TopNav extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
+    window.location.href = "/";
   };
 
   handleProfileClick = e => {
