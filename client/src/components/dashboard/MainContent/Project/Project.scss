@@ -41,9 +41,35 @@
   }
 }
 
+.check-task {
+  transition: all 0.25s ease 0s;
+
+  &:hover {
+    color: $hoverBlue;
+    transition: all 0.25s ease 0s;
+  }
+}
+
 .project-tasks {
   display: flex;
   flex-direction: column;
+
+  .project-task {
+    width: 92.5%;
+    outline: none;
+    border: none;
+    height: 36px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    margin-left: 1rem;
+
+    &:hover {
+      background-color: $lighterGray;
+      cursor: pointer;
+    }
+  }
 
   div {
     width: 100%;
@@ -63,15 +89,6 @@
     &:hover {
       cursor: pointer;
     }
-
-    margin-right: 1rem;
-  }
-
-  input {
-    width: 92.5%;
-    outline: none;
-    border: none;
-    height: 36px;
   }
 
   .task-info {
@@ -87,8 +104,9 @@
       width: 100px;
     }
 
-    &:nth-of-type(2) {
-      width: 60px;
+    &:nth-of-type(2),
+    &:nth-of-type(3) {
+      width: 100px;
     }
 
     &:hover {
@@ -101,7 +119,6 @@
 .projects-first-row {
   display: flex;
   height: 75px;
-  align-items: center;
 }
 
 .muted {

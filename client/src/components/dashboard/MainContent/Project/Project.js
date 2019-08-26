@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProject } from "../../../../actions/projectsActions";
-import { getTasks } from "../../../../actions/taskActions";
+import { getTasks, deleteTask } from "../../../../actions/taskActions";
 
 import Spinner from "../../../common/Spinner";
 import Modal from "../Modal/Modal";
@@ -20,11 +20,20 @@ class Project extends Component {
     id: "",
     owner: {},
     tasks: [],
-    date: ""
+    date: "",
+    taskName: "",
+    assignee: "",
+    taskId: "",
+    dateDue: ""
   };
 
   toggleModal = e => {
-    this.setState({ modal: !this.state.modal, edit: false, task: false });
+    this.setState({
+      modal: !this.state.modal,
+      edit: false,
+      task: false,
+      editTask: false
+    });
   };
 
   toggleEditModal = (name, members, id, owner, e) => {
@@ -45,10 +54,14 @@ class Project extends Component {
     });
   };
 
-  toggleEditTaskModal = e => {
+  toggleEditTaskModal = (taskName, assignee, dateDue, id, e) => {
     this.setState({
       modal: !this.state.modal,
-      editTask: !this.state.editTask
+      editTask: !this.state.editTask,
+      taskName: taskName,
+      assignee: assignee,
+      taskId: id,
+      dateDue: dateDue
     });
   };
 
@@ -69,35 +82,62 @@ class Project extends Component {
 
     let tasks = await [...this.state.tasks];
 
-    await alert(tasks[e.target.id].taskName);
-
     tasks[e.target.id].taskName = await e.target.value;
 
     await this.setState({ tasks });
+  };
+
+  deleteTask = id => {
+    this.props.deleteTask(id);
   };
 
   render() {
     const { tasks } = this.props.tasks;
 
     let tasksList = tasks.map((task, index) => (
-      <div className="task-input" key={index}>
-        <i className="material-icons" onClick={() => alert("TODO")}>
+      <div className="task-input" key={task._id}>
+        <i
+          className="material-icons check-task"
+          onClick={this.deleteTask.bind(this, task._id)}
+        >
           check_circle
         </i>
-        <input
-          type="text"
-          name="task"
+        <span
+          onClick={this.toggleEditTaskModal.bind(
+            this,
+            task.taskName,
+            task.assignee,
+            task.dateDue,
+            task._id
+          )}
           id={index}
-          value={task.taskName}
-          onChange={this.onChange}
+          name="task"
           className="project-task"
-        />
-        <span className={!task.assignee ? "task-info muted" : "task-info"}>
+        >
+          {task.taskName}
+        </span>
+        <span
+          onClick={this.toggleEditTaskModal.bind(
+            this,
+            task.taskName,
+            task.assignee,
+            task.dateDue,
+            task._id
+          )}
+          className={!task.assignee ? "task-info muted" : "task-info"}
+        >
           {task.assignee === this.props.auth.user.email
             ? "You"
             : task.assignee || "Unassigned"}
         </span>
         <span
+          onClick={this.toggleEditTaskModal.bind(
+            this,
+            task.taskName,
+            task.assignee,
+            task.dateDue,
+            task._id
+          )}
           className={
             task.dateDue === "Date undefined" ? "task-info muted" : "task-info"
           }
@@ -137,10 +177,15 @@ class Project extends Component {
               modal={this.state.modal}
               edit={this.state.edit}
               task={this.state.task}
+              editTask={this.state.editTask}
               name={this.state.name}
               members={this.state.members}
               id={this.state.id}
               owner={this.state.owner}
+              taskName={this.state.taskName}
+              assignee={this.state.assignee}
+              dateDue={this.state.dateDue}
+              taskId={this.state.taskId}
             />
           </div>
           <div className="tasks-container">
@@ -179,5 +224,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProject, getTasks }
+  { getProject, getTasks, deleteTask }
 )(Project);

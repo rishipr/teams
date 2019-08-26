@@ -11,6 +11,7 @@ This project uses the following technologies
 - [React.js](https://reactjs.org) for client, [React Router](https://reacttraining.com/react-router/) for routing & [Redux](https://redux.js.org/basics/usagewithreact) for state management
 - [Node.js](https://nodejs.org/en/) for server
 - [SASS](https://sass-lang.com/) as CSS preprocessor
+- [Create React App](https://github.com/facebook/create-react-app) for bootstrapping client
 
 ## Current Status
 
@@ -32,19 +33,14 @@ This project uses the following technologies
 
 #### Tasks
 
-- [x] Create, assign, view and set deadlines for team tasks
-- [ ] Edit all tasks
-- [ ] Complete tasks
+- [x] Create, set deadlines for and assign tasks for teams
+- [x] Update tasks
+- [x] Complete and delete tasks
 
 #### Containerization & Deployment
 
 - [ ] Docker
 - [ ] Deployment (AWS, Heroku, or Digital Ocean)
-
-#### Known Bugs
-
-- [ ] Logout sometimes doesn't execute properly
-- [ ] Updates to project information not reflected immediately in Project component view
 
 ## Quick Start
 
@@ -57,5 +53,6 @@ npm run full-install
 // Run client & development server with concurrently
 npm run dev
 
-// Server runs on http://localhost:5000 (set in server.js) and client on http://localhost:3000 (default for CRA)
+// Assumes Node and npm are installed on machine
+// Server runs on http://localhost:5000 (set in server.js) and client on http://localhost:3000 (default for Create React App)
 ```

@@ -7,7 +7,7 @@ import "./SideNav.scss";
 
 class SideNav extends Component {
   onLogoutClick = e => {
-    this.props.logoutUser();
+    this.props.logoutUser(this.props.history);
   };
 
   // Hide Side Nav
@@ -82,5 +82,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     { logoutUser }
-  )(SideNav)
+  )(withRouter(SideNav))
 );

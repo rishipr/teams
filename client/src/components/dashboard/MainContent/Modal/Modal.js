@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   createProject,
   updateProject,
   deleteProject
 } from "../../../../actions/projectsActions";
-import { createTask } from "../../../../actions/taskActions";
+import { createTask, deleteTask } from "../../../../actions/taskActions";
 
 import moment from "moment";
 
@@ -18,7 +19,8 @@ class Modal extends Component {
     taskName: "",
     assignee: "",
     monthDue: "",
-    dayDue: ""
+    dayDue: "",
+    taskId: ""
   };
 
   componentWillReceiveProps(nextProps) {
@@ -26,6 +28,10 @@ class Modal extends Component {
       this.setState({
         projectName: nextProps.name,
         members: nextProps.members
+      });
+    } else if (nextProps.editTask) {
+      this.setState({
+        taskName: nextProps.taskName
       });
     }
   }
@@ -75,7 +81,12 @@ class Modal extends Component {
   };
 
   deleteProject = id => {
-    this.props.deleteProject(id);
+    this.props.deleteProject(id, this.props.history);
+    this.onClose();
+  };
+
+  deleteTask = id => {
+    this.props.deleteTask(id);
     this.onClose();
   };
 
@@ -198,7 +209,7 @@ class Modal extends Component {
                   className="form-input task-input-split"
                 >
                   <option disabled value="">
-                    Select a teammate
+                    Assign to
                   </option>
                   <option value={email}>{name + " (You)"}</option>
                   {membersOptions}
@@ -244,27 +255,52 @@ class Modal extends Component {
           </div>
         </form>
       );
-    } else if (this.props.editTask) {
+    }
+
+    // Edit Task Modal
+    else if (this.props.editTask) {
       const { teamMembers } = this.props.projects.project;
       const { name, email } = this.props.auth.user;
 
+      const { assignee, dateDue, taskId } = this.props;
+      let assigneeName;
+
+      let assignedMonth = moment(dateDue).month() + 1;
+      let assignedDay = dateDue.split(" ")[1];
+
+      // Find name from email
+      teamMembers.forEach(member => {
+        if (member.email === assignee) {
+          assigneeName = member.name;
+        } else if (assignee) {
+          assigneeName = name + " (You)";
+        }
+      });
+
       // Assignee dropdown in Modal
-      let membersOptions = teamMembers.map((member, index) => (
-        <option key={index} value={member.email}>
-          {member.name}
-        </option>
-      ));
+      let membersOptions = teamMembers.map((member, index) => {
+        if (member.name !== assigneeName) {
+          return (
+            <option key={member._id} value={member.email}>
+              {member.name}
+            </option>
+          );
+        }
+        return null;
+      });
 
       // Due date dropdown in Modal
       const MONTHS = new Array(12).fill(1);
       const DAYS = new Array(31).fill(1);
 
-      let monthsOptions = MONTHS.map((month, i) => (
-        <option key={i} value={i + 1}>
-          {i < 9 && "0"}
-          {i + 1}
-        </option>
-      ));
+      let monthsOptions = MONTHS.map((month, i) => {
+        return (
+          <option key={i} value={i + 1}>
+            {i < 9 && "0"}
+            {i + 1}
+          </option>
+        );
+      });
 
       let daysOptions = DAYS.map((day, i) => (
         <option key={i} value={i + 1}>
@@ -304,10 +340,15 @@ class Modal extends Component {
                   type="text"
                   className="form-input task-input-split"
                 >
-                  <option disabled value="">
-                    Select a teammate
-                  </option>
-                  <option value={email}>{name + " (You)"}</option>
+                  {!assignee && (
+                    <option disabled value="">
+                      Assign to
+                    </option>
+                  )}
+                  {assignee && <option value={assignee}>{assigneeName}</option>}
+                  {assigneeName !== name + " (You)" && (
+                    <option value={email}>{name + " (You)"}</option>
+                  )}
                   {membersOptions}
                 </select>
               </label>
@@ -317,27 +358,35 @@ class Modal extends Component {
                   <select
                     required={this.state.dayDue ? true : false}
                     onChange={this.onSelectChange}
-                    value={this.state.monthDue}
+                    value={
+                      this.state.monthDue || parseInt(assignedMonth).toString()
+                    }
                     id="monthDue"
                     type="text"
                     className="form-input task-input-split month-due"
                   >
-                    <option disabled value="">
-                      Month
-                    </option>
+                    {!dateDue && (
+                      <option disabled value="">
+                        Month
+                      </option>
+                    )}
                     {monthsOptions}
                   </select>
                   <select
                     required={this.state.monthDue ? true : false}
                     onChange={this.onSelectChange}
-                    value={this.state.dayDue}
+                    value={
+                      this.state.dayDue || parseInt(assignedDay).toString()
+                    }
                     id="dayDue"
                     type="text"
                     className="form-input task-input-split"
                   >
-                    <option disabled value="">
-                      Day
-                    </option>
+                    {!dateDue && (
+                      <option disabled value="">
+                        Day
+                      </option>
+                    )}
                     {daysOptions}
                   </select>
                 </div>
@@ -345,8 +394,12 @@ class Modal extends Component {
             </div>
           </div>
           <div>
-            <button className="main-btn update-project" type="submit">
-              Create Task
+            <button className="main-btn update-project">Update Task</button>
+            <button
+              className="main-btn delete-project"
+              onClick={this.deleteTask.bind(this, taskId)}
+            >
+              Delete Task
             </button>
           </div>
         </form>
@@ -527,5 +580,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProject, updateProject, deleteProject, createTask }
-)(Modal);
+  { createProject, updateProject, deleteProject, createTask, deleteTask }
+)(withRouter(Modal));

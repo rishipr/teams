@@ -37,7 +37,7 @@ export const updateProject = projectData => dispatch => {
 };
 
 // Delete Project
-export const deleteProject = id => dispatch => {
+export const deleteProject = (id, history) => dispatch => {
   axios
     .delete(`/api/projects/delete/${id}`)
     .then(res =>
@@ -46,6 +46,7 @@ export const deleteProject = id => dispatch => {
         payload: id
       })
     )
+    .then(res => history.push("/dashboard"))
     .catch(err => console.log(err));
 };
 

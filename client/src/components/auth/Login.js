@@ -64,16 +64,6 @@ class Login extends Component {
     return (
       <div className="base-wrapper">
         <div className="auth-header">Sign in</div>
-        <p className="demo">
-          Just here to demo? Use <br />
-          <span className="code-mail" onClick={this.fillDemoEmail}>
-            u: test@test.com
-          </span>{" "}
-          and{" "}
-          <span className="code-mail" onClick={this.fillDemoPassword}>
-            p: test123
-          </span>
-        </p>
         <form className="auth-form" noValidate onSubmit={this.onSubmit}>
           <div className="auth-group">
             <label>

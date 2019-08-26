@@ -2,8 +2,8 @@ import axios from "axios";
 
 import {
   CREATE_TASK,
-  // UPDATE_TASK,
-  // DELETE_TASK,
+  UPDATE_TASK,
+  DELETE_TASK,
   GET_TASKS,
   TASKS_LOADING
 } from "./types";
@@ -38,6 +38,32 @@ export const getTasks = id => dispatch => {
         payload: null
       })
     );
+};
+
+// Delete Task
+export const deleteTask = id => dispatch => {
+  axios
+    .delete(`/api/tasks/delete/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_TASK,
+        payload: id
+      })
+    )
+    .catch(err => console.log(err));
+};
+
+// Update Task
+export const updateTask = taskData => dispatch => {
+  axios
+    .patch("/api/tasks/update", taskData)
+    .then(res =>
+      dispatch({
+        type: UPDATE_TASK,
+        payload: res.data
+      })
+    )
+    .catch(err => console.log(err));
 };
 
 // Tasks loading
