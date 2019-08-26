@@ -2,7 +2,7 @@
 
 Project management platform for teams, inspired by [Asana](https://asana.com/) and built using a full JavaScript stack
 
-![Current Status](http://g.recordit.co/OF2qktzoKr.gif)
+![Current Status](http://g.recordit.co/yx3oC8wmK3.gif)
 
 ## Stack (MERN & Redux)
 

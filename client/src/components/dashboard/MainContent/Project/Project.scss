@@ -43,12 +43,10 @@
 
 .check-task {
   transition: all 0.25s ease 0s;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0);
 
   &:hover {
-    opacity: 0.8;
+    color: $hoverBlue;
     transition: all 0.25s ease 0s;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
   }
 }
 

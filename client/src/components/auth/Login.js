@@ -63,7 +63,7 @@ class Login extends Component {
 
     return (
       <div className="base-wrapper">
-        <div className="auth-header">Sign in</div>
+        <div className="auth-header">Sign In</div>
         <form className="auth-form" noValidate onSubmit={this.onSubmit}>
           <div className="auth-group">
             <label>

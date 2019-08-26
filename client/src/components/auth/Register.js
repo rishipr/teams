@@ -53,7 +53,7 @@ class Register extends Component {
 
     return (
       <div className="base-wrapper">
-        <div className="auth-header">Register below</div>
+        <div className="auth-header">Register Below</div>
         <form className="auth-form" noValidate onSubmit={this.onSubmit}>
           <div className="auth-group">
             <label>
