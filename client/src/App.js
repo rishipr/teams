@@ -24,7 +24,7 @@ import "./App.scss";
 // Check for token to keep user logged in
 if (localStorage.jwtTokenTeams) {
   // Set auth token header auth
-  const token = localStorage.jwtTokenTeams;
+  const token = JSON.parse(localStorage.jwtTokenTeams);
   setAuthToken(token);
 
   // Decode token and get user info and exp

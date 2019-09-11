@@ -20,6 +20,7 @@
   margin: 0 auto;
   justify-content: center;
   margin-bottom: 1rem;
+  align-items: center;
 }
 
 .tasks-container {
@@ -135,7 +136,7 @@
 
   p {
     &:nth-of-type(1) {
-      margin-right: 1.35rem;
+      margin-right: 1.3rem;
       width: 100px;
       text-align: center;
     }
@@ -143,6 +144,7 @@
     &:nth-of-type(2) {
       width: 55px;
       text-align: center;
+      padding-right: 2rem;
     }
   }
 }

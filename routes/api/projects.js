@@ -17,11 +17,12 @@ router.get(
     await Project.find({})
       .then(projects => {
         projects.map(project => {
-          project.teamMembers.map(member => {
-            if (member.email == req.user.email) {
-              projectsArr.push(project);
-            }
-          });
+          project.teamMembers &&
+            project.teamMembers.map(member => {
+              if (member.email == req.user.email) {
+                projectsArr.push(project);
+              }
+            });
         });
       })
       .catch(err => console.log(err));
