@@ -2,7 +2,9 @@
 
 Project management platform for teams, inspired by [Asana](https://asana.com/) and built using a full JavaScript stack
 
-[Go to Demo](https://protected-eyrie-72642.herokuapp.com/) and create your own account or use `username: test@test.com` and `password: test123`
+## Demo
+
+[Go to Demo](https://protected-eyrie-72642.herokuapp.com/) and create your own account or use `username: test@test.com` and `password: test123`. The demo is hosted on Heroku using their free tier. Thus, it may take 20-30 seconds for the Heroku dyno to wake up since it sleeps after 30 minutes of inactivity.
 
 ![Current Status](http://g.recordit.co/yx3oC8wmK3.gif)
 
@@ -14,7 +16,7 @@ This project uses the following technologies
 - [Express.js](http://expressjs.com/) as Node web framework
 - [React.js](https://reactjs.org) for client, [React Router](https://reacttraining.com/react-router/) for routing & [Redux](https://redux.js.org/basics/usagewithreact) for state management
 - [Node.js](https://nodejs.org/en/) for server
-- [SASS](https://sass-lang.com/) as CSS preprocessor
+- [SASS](https://sass-lang.com/) as CSS preprocessor (no CSS frameworks)
 - [Create React App](https://github.com/facebook/create-react-app) for bootstrapping client
 
 ### Progress
