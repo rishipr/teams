@@ -4,7 +4,7 @@ Project management platform for teams, inspired by [Asana](https://asana.com/) a
 
 ## Demo
 
-[Go to Demo](https://protected-eyrie-72642.herokuapp.com/) and create your own account or use `username: test@test.com` and `password: test123`. The demo is hosted on Heroku using their free tier. Thus, it may take 20-30 seconds for the Heroku dyno to wake up since it sleeps after 30 minutes of inactivity.
+[Go to Demo](https://protected-eyrie-72642.herokuapp.com/) and create your own account or use `username: t@test.com` and `password: test123`. The demo is hosted on Heroku using their free tier. Thus, it may take 20-30 seconds for the Heroku dyno to wake up since it sleeps after 30 minutes of inactivity.
 
 ![Current Status](http://g.recordit.co/yx3oC8wmK3.gif)
 
